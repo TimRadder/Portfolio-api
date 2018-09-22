@@ -35,7 +35,7 @@ $app->get('/api/skill/{id}', function(Request $request, Response $response){
     $skill = null;
 
     echo $res;
-});
+})->add(new AuthMiddleWare());
 
 //Add Skill
 $app->post('/api/skill/add', function(Request $request, Response $response){
@@ -76,29 +76,7 @@ $app->put('/api/skill/update/{id}', function(Request $request, Response $respons
     $skill = null;
 
     echo $res;
-
-    /* $name = $data['skill']['name'];
-    $type = $data['skill']['type'];
-
-    try{
-        // Get DB Object
-        $db = new DB();
-        // Call Connect function
-        $db = $db->connect();
-        // Create PDO prepared Statement
-        $stmt = $db->prepare($sql);
-
-        $stmt->execute([
-            ":id" => $id,
-            ":skill" => $skill,
-            ":type" => $type
-        ]);
-
-        echo '{"code": 200, "message" : "Skill has been updated"}';
-    } catch(PDOException $e) {
-        echo '{"code": 500, "error" : text" : '. $e->getMessage() .'}';
-    } */
-});
+})->add(new AuthMiddleWare());
 
 // Delete Skill
 $app->delete('/api/skill/delete/{id}', function(Request $request, Response $response){
@@ -113,5 +91,5 @@ $app->delete('/api/skill/delete/{id}', function(Request $request, Response $resp
     $skill = null;
 
     echo $res;
-});
+})->add(new AuthMiddleWare());
 ?>

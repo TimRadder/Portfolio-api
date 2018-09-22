@@ -3,19 +3,21 @@
 
     class Dashboard{
         private $db;
+        private $response;
 
         public function __construct($db)
         {
             $this->db = $db;
+            $response = new Response();
         }
 
         public function __destruct() {
             $this->db = null;
+            $this->response = null;
         }
 
         public function GetDashboard()
         {
-            $response = new Response();
             $data = array();
             $sqlArray = array();
 
@@ -30,13 +32,13 @@
                 $skills = $stmt->fetchAll(PDO::FETCH_OBJ);
                 $data['skills'] = $skills;
 
-                $response->SetCode(200);
-                $response->SetJSONData($data);
+                $this->response->SetCode(200);
+                $this->response->SetJSONData($data);
             } catch(PDOException $e) {
-                $response->SetCode(500);
-                $response->SetMessage($e->getMessage());
+                $this->response->SetCode(500);
+                $this->response->SetMessage($e->getMessage());
             }
 
-            return $response->GetResponse();
+            return $this->response->GetResponse();
         }
     }

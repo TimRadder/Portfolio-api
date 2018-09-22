@@ -6,10 +6,10 @@ $app->get('/api/admin/dashboard', function(Request $request, Response $response)
     $db = new DB();
     $db = $db->connect();
 
-    $dashbaord = new Dashboard($db);
+    $dashboard = new Dashboard($db);
 
-    $res = $dashbaord->GetDashboard();
-    $dashbaord = null;
+    $res =  $dashboard->GetDashboard();
+    $dashboard = null;
 
     echo $res;
 });
