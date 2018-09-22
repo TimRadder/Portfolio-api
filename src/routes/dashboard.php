@@ -1,0 +1,15 @@
+<?php
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+$app->get('/api/admin/dashboard', function(Request $request, Response $response){
+    $db = new DB();
+    $db = $db->connect();
+
+    $dashbaord = new Dashboard($db);
+
+    $res = $dashbaord->GetDashboard();
+    $dashbaord = null;
+
+    echo $res;
+});
