@@ -25,7 +25,7 @@ $app->get('/api/exps', function(Request $request, Response $response){
 // Get An Experience
 $app->get('/api/exp/{id}', function(Request $request, Response $response){
     $id = $request->getAttribute('id');
-    $sql = "SELECT * FROM experience";
+    $sql = "SELECT * FROM experience WHERE id = :id";
 
     try{
         // Get DB Object
@@ -128,7 +128,7 @@ $app->put('/api/exp/update/{id}', function(Request $request, Response $response)
 
         $stmt->execute();
 
-        echo '{"code": 200, "notice" : {"text": "Experience has been Updated"}}';
+        echo '{"code": 200, "message" : "Experience has been Updated"}';
     } catch(PDOException $e) {
         echo '{"code": 500, "error" : {"text" : '. $e->getMessage() .'}}';
     }
