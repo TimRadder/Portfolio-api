@@ -24,7 +24,7 @@ $app->get('/api/education/awards/{id}', function(Request $request, Response $res
         echo '{"error" : {"text" : '. $e->getMessage() .'}}';
     }
 
-});
+})->add(new AuthMiddleWare());
 
 // Add new Award
 $app->post('/api/education/awards/add', function(Request $request, Response $response){

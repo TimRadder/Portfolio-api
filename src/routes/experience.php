@@ -43,7 +43,7 @@ $app->get('/api/exp/{id}', function(Request $request, Response $response){
     } catch(PDOException $e) {
         echo '{"error" : {"text" : '. $e->getMessage() .'}}';
     }
-});
+})->add(new AuthMiddleWare());
 
 // Add Experience
 $app->post('/api/exp/add', function(Request $request, Response $response){
@@ -91,7 +91,7 @@ $app->post('/api/exp/add', function(Request $request, Response $response){
     } catch(PDOException $e) {
         echo '{"code": 500, error" : {"text" : '. $e->getMessage() .'}}';
     }
-});
+})->add(new AuthMiddleWare());
 
 // Update Experience
 $app->put('/api/exp/update/{id}', function(Request $request, Response $response){
@@ -132,7 +132,7 @@ $app->put('/api/exp/update/{id}', function(Request $request, Response $response)
     } catch(PDOException $e) {
         echo '{"code": 500, "error" : {"text" : '. $e->getMessage() .'}}';
     }
-});
+})->add(new AuthMiddleWare());
 
 // Delete Experience
 $app->delete('/api/exp/delete/{id}', function(Request $request, Response $response){
@@ -155,6 +155,6 @@ $app->delete('/api/exp/delete/{id}', function(Request $request, Response $respon
     } catch(PDOException $e) {
         echo '{"code": 500, "error" : {"text" : '. $e->getMessage() .'}}';
     }
-});
+})->add(new AuthMiddleWare());
 
 ?>

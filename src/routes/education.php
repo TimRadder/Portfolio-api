@@ -80,7 +80,7 @@ $app->get('/api/education/schools', function(Request $request, Response $respons
     } catch(PDOException $e) {
         echo '{"error" : {"text" : '. $e->getMessage() .'}}';
     }
-});
+})->add(new AuthMiddleWare());
 
 // Get An Education
 $app->get('/api/education/{id}', function(Request $request, Response $response){
@@ -113,7 +113,48 @@ $app->get('/api/education/{id}', function(Request $request, Response $response){
     } catch(PDOException $e) {
         echo '{"error" : {"text" : '. $e->getMessage() .'}}';
     }
-});
+})->add(new AuthMiddleWare());
+
+$app->post('/api/education/add', function(Request $request, Response $response){
+    $json = $request->getBody();
+    $data = json_decode($json, true);
+
+    $school = $data['school'];
+    $gradDate = $data['gradDate'];
+    $course = $data['course'];
+    $schoolID = uniqid();
+
+    $sql = "INSERT INTO education (school, gradDate, course, schoolID) VALUES (
+        :school,
+        :gradDate,
+        :course,
+        :schoolID
+    )";
+
+    try{
+        // Get DB Object
+        $db = new DB();
+        // Call Connect function
+        $db = $db->connect();
+        // Create PDO prepared Statement
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindParam(':school', $school);
+        $stmt->bindParam(':gradDate', $gradDate);
+        $stmt->bindParam(':course', $course);
+        $stmt->bindParam(':schoolID', $schoolID);
+
+        if($stmt->execute()) {
+            echo '{"code": 200,"message": "Education has been added"}';
+        } else {
+            echo '{"code": 500,"message": "Education has not been added"}';
+        }
+
+
+    } catch(PDOException $e) {
+        echo '{"code": 500, "message" : "Error: '. $e->getMessage() .'"}';
+    }
+})->add(new AuthMiddleWare());
 
 // Update Education
 $app->put('/api/education/update/{id}', function(Request $request, Response $response){
@@ -138,9 +179,9 @@ $app->put('/api/education/update/{id}', function(Request $request, Response $res
         $stmt = $db->prepare($sql);
 
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':school', $employer);
-        $stmt->bindParam(':course', $startDate);
-        $stmt->bindParam(':gradDate', $endDate);
+        $stmt->bindParam(':school', $school);
+        $stmt->bindParam(':course', $course);
+        $stmt->bindParam(':gradDate', $gradeDate);
 
         $stmt->execute();
 
