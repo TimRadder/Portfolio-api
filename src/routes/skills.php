@@ -54,7 +54,7 @@ $app->post('/api/skill/add', function(Request $request, Response $response){
     $skill = null;
 
     echo $res;
-    
+
 })->add(new AuthMiddleWare());
 
 // Update Skill

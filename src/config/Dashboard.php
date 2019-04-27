@@ -37,6 +37,12 @@
                 $skills = $stmt->fetchAll(PDO::FETCH_OBJ);
                 $data['experience'] = $skills;
 
+                // Get Educations from DB
+                $stmt = $this->db->prepare($sqlArray['education']);
+                $stmt->execute();
+                $education = $stmt->fetchAll(PDO::FETCH_OBJ);
+                $data['education'] = $education;
+
                 $this->response->SetCode(200);
                 $this->response->SetJSONData($data);
             } catch(PDOException $e) {

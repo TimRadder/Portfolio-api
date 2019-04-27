@@ -11,6 +11,8 @@ require 'skills.php';
 require 'experience.php';
 // Education Routes
 require 'education.php';
+// Education Award Routes
+require 'awards.php';
 // Interests/Hobbies Routes
 require 'interests.php';
 // Auth Routes
