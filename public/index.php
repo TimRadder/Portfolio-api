@@ -12,6 +12,7 @@ require '../vendor/autoload.php';
 require '../src/config/db.php';
 require '../src/config/Res.php';
 require '../src/config/Skill.php';
+require '../src/config/Interest.php';
 require '../src/config/Dashboard.php';
 require '../src/res/JWT.php';
 

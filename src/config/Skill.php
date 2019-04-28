@@ -43,7 +43,7 @@
             return $response->GetResponse();
         }
 
-        // Get ALL Skills from Database
+        // Get ONE Skills from Database
         public function GetSkill($id, $sql)
         {
             $response = new Response();

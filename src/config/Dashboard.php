@@ -22,7 +22,7 @@
             $sqlArray['skills'] = "SELECT * FROM skills ORDER BY type, name";
             $sqlArray['experience'] = "SELECT id, employer, jobTitle FROM experience ORDER BY d_startDate DESC ";
             $sqlArray['education'] = "SELECT id, school, course FROM education";
-            $sqlArray['interests'] = "SELECT * FROM interests";
+            $sqlArray['interests'] = "SELECT * FROM interests ORDER BY type, activity";
 
             try{
                 // Get Skills from DB
@@ -42,6 +42,12 @@
                 $stmt->execute();
                 $education = $stmt->fetchAll(PDO::FETCH_OBJ);
                 $data['education'] = $education;
+
+                // Get Interests and Hobbies
+                $stmt = $this->db->prepare($sqlArray['interests']);
+                $stmt->execute();
+                $interests = $stmt->fetchAll(PDO::FETCH_OBJ);
+                $data['interests'] = $interests;
 
                 $this->response->SetCode(200);
                 $this->response->SetJSONData($data);
